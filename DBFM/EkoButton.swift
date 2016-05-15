@@ -15,7 +15,7 @@ class EkoButton: UIButton {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.addTarget(self, action: "onClick", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addTarget(self, action: #selector(EkoButton.onClick), forControlEvents: UIControlEvents.TouchUpInside)
         
     }
     func onClick(){

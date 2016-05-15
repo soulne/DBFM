@@ -81,13 +81,13 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         //让tableview的背景透明
         tv.backgroundColor = UIColor.clearColor()
         
-        self.btnPlay.addTarget(self, action: "onPlay:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.btnNext.addTarget(self, action: "onClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.btnPre.addTarget(self, action: "onClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.btnOrder.addTarget(self, action: "onOrder:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnPlay.addTarget(self, action: #selector(ViewController.onPlay(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnNext.addTarget(self, action: #selector(ViewController.onClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnPre.addTarget(self, action: #selector(ViewController.onClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnOrder.addTarget(self, action: #selector(ViewController.onOrder(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         //播放结束通知
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playFinish", name: MPMoviePlayerPlaybackDidFinishNotification, object: audioPlayer)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.playFinish), name: MPMoviePlayerPlaybackDidFinishNotification, object: audioPlayer)
     }
     
     var isAutoFinish = true
@@ -98,7 +98,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         if self.isAutoFinish{
         switch(btnOrder.order){
         case 1:
-            currIndex++
+            currIndex += 1
             if currIndex > tableData.count - 1 {
                 currIndex = 0
             }
@@ -132,13 +132,13 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     func onClick(btn:UIButton){
         if btn == btnNext{
-            self.currIndex++
+            self.currIndex += 1
             if self.currIndex > self.tableData.count - 1 {
                 self.currIndex = 0
             }
            
         }else{
-            self.currIndex--
+            self.currIndex -= 1
             if self.currIndex  < 0{
                 self.currIndex = self.tableData.count - 1
             }
@@ -239,7 +239,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         //计时器归零
         playerTime.text = "00:00"
         //启动计时器
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "onUpdate", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.onUpdate), userInfo: nil, repeats: true)
         btnPlay.onPlay()
         
     }

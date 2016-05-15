@@ -17,10 +17,10 @@ class OrderButton: UIButton {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.addTarget(self, action: "onClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addTarget(self, action: #selector(OrderButton.onClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
     func onClick(sender:UIButton){
-        order++
+        order += 1
         if order == 1 {
             self.setImage(order1, forState: UIControlState.Normal)
         }else if order == 2{
